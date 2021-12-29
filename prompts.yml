@@ -24,8 +24,3 @@ python_package:
   error_message: |
     It must start with a letter or underscore, be at least 2 characters long
     and contain only letters, digits, and/or underscores.
-kedro_version:
-  title: "kedro package version"
-  text: |
-    This corresponds to the kedro package version which should correspond to
-    the repo tag
