@@ -1,0 +1,6 @@
+output_dir: ./code
+project_name: Get Started
+repo_name: get-started
+python_package: get_started
+checkout: 0.17.6
+include_example: true
