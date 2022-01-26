@@ -36,8 +36,7 @@ raw-athena-dataset:
   # filepath for CSV query result to be saved as; can be nullable -> comment out if so
   filepath: data/01_raw/athena_results.csv
   # you can overwrite defaults
-  download_result: true
-  file_overwrite: true
+  overwrite: true
 
 # **********************************************************************
 # intermediate datasets
