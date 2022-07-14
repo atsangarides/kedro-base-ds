@@ -1,9 +1,25 @@
+[tool.poetry]
+name = "{{ cookiecutter.project_name }}"
+version = "0.1.0"
+description = "Add description here"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.11"
+kedro = "^0.18.2"
+pandas = "^1.4.3"
+pyarrow = "^8.0.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.2"
+
 [tool.kedro]
 package_name = "{{ cookiecutter.python_package }}"
 project_name = "{{ cookiecutter.project_name }}"
 project_version = "{{ cookiecutter.kedro_version }}"
 
 [tool.isort]
+profile = "black"
 multi_line_output = 3
 include_trailing_comma = true
 force_grid_wrap = 0
@@ -14,9 +30,13 @@ known_third_party = "kedro"
 [tool.pytest.ini_options]
 addopts = """
 --cov-report term-missing \
---cov src/{{ cookiecutter.python_package }} -ra"""
+--cov src/kedro_test_182 -ra"""
 
 [tool.coverage.report]
 fail_under = 0
 show_missing = true
 exclude_lines = ["pragma: no cover", "raise NotImplementedError"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

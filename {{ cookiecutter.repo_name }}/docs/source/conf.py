@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-# kedro_cookiecutter_base documentation build
+# kedro_test_182 documentation build
 # configuration file, created by sphinx-quickstart.
 #
 # This file is execfile()d with the current directory set to its
@@ -20,14 +20,13 @@
 import re
 
 from kedro.framework.cli.utils import find_stylesheets
-from recommonmark.transform import AutoStructify
 
-from kedro_cookiecutter_base import __version__ as release
+from {{ cookiecutter.python_package }} import __version__ as release
 
 # -- Project information -----------------------------------------------------
 
-project = "kedro_cookiecutter_base"
-author = "QuantumBlack"
+project = "{{ cookiecutter.python_package }}"
+author = "Kedro"
 
 # The short X.Y version.
 version = re.match(r"^([0-9]+\.[0-9]+).*", release).group(1)
@@ -53,7 +52,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.mathjax",
     "nbsphinx",
-    "recommonmark",
+    "myst_parser",
     "sphinx_copybutton",
 ]
 
@@ -120,7 +119,7 @@ html_show_sourcelink = False
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "kedro_cookiecutter_basedoc"
+htmlhelp_basename = "kedro_test_182doc"
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -148,9 +147,9 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        "kedro_cookiecutter_base.tex",
-        "kedro_cookiecutter_base Documentation",
-        "QuantumBlack",
+        "kedro_test_182.tex",
+        "kedro_test_182 Documentation",
+        "Kedro",
         "manual",
     )
 ]
@@ -162,8 +161,8 @@ latex_documents = [
 man_pages = [
     (
         master_doc,
-        "kedro_cookiecutter_base",
-        "kedro_cookiecutter_base Documentation",
+        "{{ cookiecutter.python_package }}",
+        "{{ cookiecutter.python_package }} Documentation",
         [author],
         1,
     )
@@ -177,11 +176,11 @@ man_pages = [
 texinfo_documents = [
     (
         master_doc,
-        "kedro_cookiecutter_base",
-        "kedro_cookiecutter_base Documentation",
+        "{{ cookiecutter.python_package }}",
+        "{{ cookiecutter.python_package }} Documentation",
         author,
-        "kedro_cookiecutter_base",
-        "Project kedro_cookiecutter_base codebase.",
+        "{{ cookiecutter.python_package }}",
+        "Project {{ cookiecutter.python_package }} codebase.",
         "Data-Science",
     )
 ]
@@ -223,6 +222,3 @@ def setup(app):
     # add Kedro stylesheets
     for stylesheet in find_stylesheets():
         app.add_css_file(stylesheet)
-    # enable rendering RST tables in Markdown
-    app.add_config_value("recommonmark_config", {"enable_eval_rst": True}, True)
-    app.add_transform(AutoStructify)

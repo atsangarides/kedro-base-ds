@@ -3,6 +3,7 @@
 ## Overview 
 A `kedro` starter template for supported versions:
 * `0.17.6`
+* `0.18.2`
 
 ## Usage
 Navigate to your projects folder

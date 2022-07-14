@@ -1,7 +1,7 @@
 """Project pipelines."""
 from typing import Dict
 
-from kedro.pipeline import Pipeline, node
+from kedro.pipeline import Pipeline, pipeline, node
 
 # from .nodes.raw import f
 # from .nodes.intermediate import f
@@ -13,7 +13,7 @@ from kedro.pipeline import Pipeline, node
 # from .nodes.reporting import f
 
 
-def create_pipelines() -> Dict[str, Pipeline]:
+def register_pipelines() -> Dict[str, Pipeline]:
     """Create the project's pipeline.
     Returns:
         A mapping from a pipeline name to a ``Pipeline`` object.
