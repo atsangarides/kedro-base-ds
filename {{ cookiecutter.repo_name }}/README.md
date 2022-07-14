@@ -10,7 +10,7 @@ If `kedro run` is not the only step needed, please explain how the pipeline shou
 
 ## Overview
 
-This is your new Kedro project, which was generated using `Kedro 0.17.6`.
+This is your new Kedro project, which was generated using `Kedro 0.18.2`.
 
 Take a look at the [Kedro documentation](https://kedro.readthedocs.io) to get started.
 
@@ -25,7 +25,7 @@ In order to get the best out of the template:
 
 ### Naming convention for data
 The nodes should have outputs in the corresponding data folders, i.e. the nodes that are part of the `primary_pipeline`
-under `src/<package_name>/pipeline.py` should import function(s) from `src/<package_name>/nodes/03_primary.py` and 
+under `src/<package_name>/pipeline.py` should import function(s) from `src/{{ cookiecutter.python_package }}/nodes/primary.py` and 
 should output datasets to the `data/03_primary` folder.
 
 Data folder/node | Purpose |
@@ -41,25 +41,10 @@ Data folder/node | Purpose |
 
 
 ## Create a new virtual environment
-### Using pyenv
+### Using poetry
+poetry will use the pyproject.toml and poetry.lock files to configure the virtual env
 ```shell
-pyenv virtual env <any python version you have installed> <venv name>
-# if not already here, navigate with your terminal to this project
-pyenv local <venv name>
-# this should have created a .python-version file with the only content being the name of the venv
-# every time you navigate into this project now the virtual env should activate itself
-```
-
-### Using virtualenv
-```shell
-# install virtualenv package if not already installed
-pip install virtualenv
-# if not already here, navigate with your terminal to this project
-# create the virtual environment
-virtualenv <venv name>
-# this should create a new folder called <venv name> under the project root
-# open the /gitignore file and add <venv name> to it so that it is excluded from the commits
-# make sure you activate the environment before install dependencies or running kedro
+poetry shell
 ```
 
 ### Set up PyCharm
@@ -69,12 +54,9 @@ virtualenv <venv name>
 
 ## How to install dependencies
 
-Declare any dependencies in `src/requirements.txt` for `pip` installation and `src/environment.yml` for `conda` installation.
-If it's a newly created venv, you will need to install the basic dependencies, which include kedro:
+Dependencies are declared in pyproject.toml, and all package inter-dependencies resolved and logged in poetry.lock
 ```shell
-pip install -r src/requirements.txt
-# if you also need to use athena/s3 run the command below
-pip install -r src/private-requirements.txt
+poetry install
 ```
 
 
@@ -98,17 +80,12 @@ To configure the coverage threshold, go to the `.coveragerc` file.
 
 ## Project dependencies
 
-To generate or update the dependency requirements for your project:
+To add new dependency requirements for your project:
 
 ```
-kedro build-reqs
+poetry add <new-package-name>
 ```
 
-This will copy the contents of `src/requirements.txt` into a new file `src/requirements.in` which will be used as the source for `pip-compile`. You can see the output of the resolution by opening `src/requirements.txt`.
-
-After this, if you'd like to update your project requirements, please update `src/requirements.in` and re-run `kedro build-reqs`.
-
-[Further information about project dependencies](https://kedro.readthedocs.io/en/stable/04_kedro_project_setup/01_dependencies.html#project-specific-dependencies)
 
 ## How to work with Kedro and notebooks
 
@@ -120,7 +97,7 @@ After this, if you'd like to update your project requirements, please update `sr
 To use Jupyter notebooks in your Kedro project, you need to install Jupyter:
 
 ```
-pip install jupyter
+poetry add jupyter
 ```
 
 After installing Jupyter, you can start a local notebook server:
@@ -174,24 +151,14 @@ To automatically strip out all output cell contents before committing to `git`, 
 ## Deployed pipelines
 Dockerfiles have been included as starting templates:
 * `Dockerfile` for the actual image to be used in ECR
-* `Dockerfile.dev` for local testing of the image prior to pushing the prod image to ECR
+
 ### Building the image
 Run the below commands to add ssh config and build the image
 ```shell script
-export DOCKER_BUILDKIT=1  
-eval 'ssh-agent'
-ssh-add ~/.ssh/id_rsa
-docker build -t <image-tag> --ssh default=$SSH_AUTH_SOCK .
-# or use the following if building the test image
-# --no-cache ensures everything is rebuilt (for example mm_kedro is re-downloaded)
-docker build -t <image-tag> --no-cache --ssh default=$SSH_AUTH_SOCK -f Dockerfile.dev .
-# docker build -t <image-tag>-test --ssh default=$SSH_AUTH_SOCK -f Dockerfile.dev .
+
+docker build -t <image-tag> .
 ```
 Running the test image (env variables already set there)
 ```shell
-docker run -v ~/.aws/:/home/kedro/.aws/ <image-tag>-test
+docker run <image-tag>
 ```
-
-## Package your Kedro project
-
-[Further information about building project documentation and packaging your project](https://kedro.readthedocs.io/en/stable/03_tutorial/05_package_a_project.html)
