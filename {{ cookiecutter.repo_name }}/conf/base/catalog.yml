@@ -1,42 +1,16 @@
 # Here you can define all your data sets by using simple YAML syntax.
 #
 # Documentation for this file format can be found in "The Data Catalog"
-# Link: https://kedro.readthedocs.io/en/stable/05_data/01_data_catalog.html
-
-# Here you can define all your data sets by using simple YAML syntax.
-#
-# Documentation for this file format can be found in "The Data Catalog"
-# Link: https://kedro.readthedocs.io/en/stable/04_user_guide/04_data_catalog.html
-
-# **********************************************************************
-# kedroio DataSet templates
-# **********************************************************************
-
-# Reads a sql file, executes the Athena query and fetches the result
-_athena: &athena
-  type: kedroio.datasets.aws.athena.AthenaQueryDataSet
-  filepath: data/01_raw/example.csv
-  sql_filepath: example.sql
-  bucket: athena-csv-result-utput-bucket # change this
-  workgroup: data # set according to your Athena workgroup
-  subfolder: data # if you want to write under a s3 subfolder
-  region_name: eu-west-2
-  read_result: true # read into pandas DataFrame
-  overwrite: false # skip download if filepath exists
+# Link: https://kedro.readthedocs.io/en/stable/data/data_catalog.html
 
 
 # **********************************************************************
 # raw datasets
 # **********************************************************************
 # examples
-raw-athena-dataset:
-  <<: *athena
-  # the path to the sql file
-  sql_filepath: src/{{ cookiecutter.python_package }}/sql/<name>.sql
-  # filepath for CSV query result to be saved as; can be nullable -> comment out if so
-  filepath: data/01_raw/athena_results.csv
-  # you can overwrite defaults
-  overwrite: true
+#raw-dataset:
+#  type: pandas.CSVDataSet
+#  filepath: data/01_raw/data.csv
 
 # **********************************************************************
 # intermediate datasets

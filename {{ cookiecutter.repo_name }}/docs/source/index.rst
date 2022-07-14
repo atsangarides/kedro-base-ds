@@ -1,8 +1,8 @@
-.. kedro_cookiecutter_base documentation master file, created by sphinx-quickstart.
+.. kedro_test_182 documentation master file, created by sphinx-quickstart.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to project kedro_cookiecutter_base's API docs!
+Welcome to project kedro_test_182's API docs!
 =============================================
 
 .. toctree::

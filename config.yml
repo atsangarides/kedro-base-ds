@@ -2,5 +2,5 @@ output_dir: ./code
 project_name: Get Started
 repo_name: get-started
 python_package: get_started
-kedro_version: 0.17.6
+kedro_version: 0.18.2
 include_example: false
