@@ -16,7 +16,7 @@ pytest = "^7.1.2"
 [tool.kedro]
 package_name = "{{ cookiecutter.python_package }}"
 project_name = "{{ cookiecutter.project_name }}"
-project_version = "{{ cookiecutter.kedro_version }}"
+project_version = "0.18.2"
 
 [tool.isort]
 profile = "black"
