@@ -40,7 +40,7 @@ loggers:
   kedro:
     level: INFO
 
-  kedro_test_182:
+  {{ cookiecutter.python_package }}:
     level: INFO
 
 root:
